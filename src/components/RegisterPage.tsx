@@ -2,24 +2,26 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 
 interface RegisterPageProps {
-  onSubmit: (data: { firstName: string; lastName: string; email: string }) => void;
+  onSubmit: (data: { firstName: string; lastName: string; email: string; branch: string }) => void;
 }
 
 const RegisterPage = ({ onSubmit }: RegisterPageProps) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    email: ""
+    email: "",
+    branch: ""
   });
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.firstName || !formData.lastName || !formData.email) {
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.branch) {
       toast({
         title: "Access Denied",
         description: "All fields are required to enter the quiz arena",
@@ -91,6 +93,27 @@ const RegisterPage = ({ onSubmit }: RegisterPageProps) => {
                   className="bg-input/50 border-primary/30 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary neon-glow"
                   placeholder="Enter email address"
                 />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="branch" className="text-foreground font-mono">Branch</Label>
+                <Select value={formData.branch} onValueChange={(value) => handleChange("branch", value)}>
+                  <SelectTrigger className="bg-input/50 border-primary/30 text-foreground focus:border-primary focus:ring-primary neon-glow">
+                    <SelectValue placeholder="Select your branch" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover border-primary/30">
+                    <SelectItem value="computer-engineering">Computer Engineering</SelectItem>
+                    <SelectItem value="information-technology">Information Technology</SelectItem>
+                    <SelectItem value="electronics-engineering">Electronics Engineering</SelectItem>
+                    <SelectItem value="mechanical-engineering">Mechanical Engineering</SelectItem>
+                    <SelectItem value="civil-engineering">Civil Engineering</SelectItem>
+                    <SelectItem value="electrical-engineering">Electrical Engineering</SelectItem>
+                    <SelectItem value="data-science">Data Science</SelectItem>
+                    <SelectItem value="artificial-intelligence">Artificial Intelligence</SelectItem>
+                    <SelectItem value="cybersecurity">Cybersecurity</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
             
