@@ -54,8 +54,8 @@ const QuizPage = ({ question, onAnswer, questionNumber, totalQuestions }: QuizPa
   };
 
   return (
-    <div className="min-h-screen bg-background cyberpunk-grid flex items-center justify-center relative p-4">
-      <div className="w-full max-w-4xl mx-auto">
+    <div className="min-h-screen w-full bg-background cyberpunk-grid flex items-center justify-center relative p-4 overflow-x-hidden">
+      <div className="w-full max-w-4xl mx-auto overflow-hidden">
         {/* Header */}
         <div className="hologram rounded-lg p-8 mb-6">
           <div className="flex justify-between items-center">
