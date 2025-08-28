@@ -20,12 +20,12 @@ const QuizPage = ({ question, onAnswer, questionNumber, totalQuestions }: QuizPa
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [showResult, setShowResult] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(30);
+  const [timeLeft, setTimeLeft] = useState(60);
 
   useEffect(() => {
     setSelectedOption("");
     setShowResult(false);
-    setTimeLeft(30);
+    setTimeLeft(60);
   }, [question.id]);
 
   useEffect(() => {
@@ -48,8 +48,8 @@ const QuizPage = ({ question, onAnswer, questionNumber, totalQuestions }: QuizPa
   };
 
   const getTimeColor = () => {
-    if (timeLeft > 20) return "text-primary";
-    if (timeLeft > 10) return "text-yellow-400";
+    if (timeLeft > 40) return "text-primary";
+    if (timeLeft > 20) return "text-yellow-400";
     return "text-destructive";
   };
 

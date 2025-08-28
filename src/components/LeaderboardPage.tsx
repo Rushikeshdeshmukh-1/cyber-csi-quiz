@@ -86,25 +86,31 @@ const LeaderboardPage = ({ userScore, userName }: LeaderboardPageProps) => {
         </div>
         
         {/* Top 3 Podium */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
-          {leaderboard.slice(0, 3).map((entry, index) => {
-            const positions = [1, 0, 2]; // Second, First, Third
-            const actualIndex = positions[index];
-            const actualEntry = leaderboard[actualIndex];
-            const heights = ["h-24", "h-32", "h-20"];
-            
-            return (
-              <div key={actualEntry.rank} className="text-center">
-                <div className={`hologram rounded-lg p-4 ${heights[index]} flex flex-col justify-end ${getRankStyle(actualEntry.rank)}`}>
-                  <div className="text-2xl font-bold">#{actualEntry.rank}</div>
-                  <div className="text-sm font-medium truncate">{actualEntry.name}</div>
-                  <div className={`text-lg font-bold ${getScoreColor(actualEntry.score)}`}>
-                    {actualEntry.score}/10
+        <div className="hologram rounded-lg p-6 mb-8">
+          <h3 className="text-xl font-bold text-foreground mb-6 text-center">🏆 Top 3 Champions 🏆</h3>
+          <div className="grid grid-cols-3 gap-4">
+            {[1, 0, 2].map((index) => {
+              const entry = leaderboard[index];
+              if (!entry) return null;
+              
+              const heights = ["h-20", "h-28", "h-16"];
+              const trophies = ["🥈", "🥇", "🥉"];
+              const positions = ["2nd", "1st", "3rd"];
+              
+              return (
+                <div key={entry.rank} className="text-center">
+                  <div className="text-3xl mb-2">{trophies[index === 1 ? 0 : index === 0 ? 1 : 2]}</div>
+                  <div className={`hologram rounded-lg p-4 ${heights[index]} flex flex-col justify-center ${getRankStyle(entry.rank)} border-2`}>
+                    <div className="text-lg font-bold">{positions[index === 1 ? 0 : index === 0 ? 1 : 2]}</div>
+                    <div className="text-sm font-medium truncate">{entry.name}</div>
+                    <div className={`text-lg font-bold ${getScoreColor(entry.score)}`}>
+                      {entry.score}/10
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
         
         {/* Full Leaderboard */}
